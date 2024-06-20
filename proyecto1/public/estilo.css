@@ -1,0 +1,36 @@
+/* estilos view 1 */
+body {
+    background-color: #f8f9fa;
+}
+.jumbotron {
+    background-color: #343a40;
+    color: white;
+}
+.btn-custom {
+    background-color: #007bff;
+    color: white;
+}
+
+/* estilos view 2 */
+body {
+    background-color: #f8f9fa;
+}
+.card-header.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* estilos view 3 */
+body {
+    background-color: #f8f9fa;
+}
+
+/* estilos view 4 */
+
+body {
+    background-color: #f8f9fa;
+}
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
