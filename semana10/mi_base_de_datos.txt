@@ -1,0 +1,120 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-06-2024 a las 02:35:38
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `mi_base_de_datos`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_roles`
+--
+
+CREATE TABLE `tbl_roles` (
+  `rol_id` int(11) NOT NULL,
+  `rol_nombre` varchar(50) NOT NULL,
+  `rol_descripcion` varchar(255) NOT NULL,
+  `rol_estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
+  `rol_fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `rol_fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_roles`
+--
+
+INSERT INTO `tbl_roles` (`rol_id`, `rol_nombre`, `rol_descripcion`, `rol_estado`, `rol_fecha_creacion`, `rol_fecha_actualizacion`) VALUES
+(1, 'Administrador', 'Usuario con todos los permisos', 'activo', '2024-06-29 00:33:23', '2024-06-29 00:33:23'),
+(2, 'Usuario', 'Usuario con permisos limitados', 'activo', '2024-06-29 00:33:23', '2024-06-29 00:33:23'),
+(3, 'Editor', 'Usuario con permisos para editar contenido', 'activo', '2024-06-29 00:33:23', '2024-06-29 00:33:23'),
+(4, 'Moderador', 'Usuario con permisos para moderar contenido', 'activo', '2024-06-29 00:33:23', '2024-06-29 00:33:23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_usuarios`
+--
+
+CREATE TABLE `tbl_usuarios` (
+  `usu_id` int(11) NOT NULL,
+  `usu_nombre` varchar(50) NOT NULL,
+  `usu_apellido` varchar(50) NOT NULL,
+  `usu_correo` varchar(100) NOT NULL,
+  `rol_id` int(11) DEFAULT NULL,
+  `usu_fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_usuarios`
+--
+
+INSERT INTO `tbl_usuarios` (`usu_id`, `usu_nombre`, `usu_apellido`, `usu_correo`, `rol_id`, `usu_fecha_registro`) VALUES
+(1, 'Juan', 'Pérez', 'juan.perez@example.com', 1, '2024-06-29 00:33:23'),
+(2, 'Ana', 'Gómez', 'ana.gomez@example.com', 2, '2024-06-29 00:33:23'),
+(3, 'Carlos', 'López', 'carlos.lopez@example.com', 3, '2024-06-29 00:33:23'),
+(4, 'María', 'Rodríguez', 'maria.rodriguez@example.com', 4, '2024-06-29 00:33:23');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tbl_roles`
+--
+ALTER TABLE `tbl_roles`
+  ADD PRIMARY KEY (`rol_id`);
+
+--
+-- Indices de la tabla `tbl_usuarios`
+--
+ALTER TABLE `tbl_usuarios`
+  ADD PRIMARY KEY (`usu_id`),
+  ADD KEY `rol_id` (`rol_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_roles`
+--
+ALTER TABLE `tbl_roles`
+  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_usuarios`
+--
+ALTER TABLE `tbl_usuarios`
+  MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `tbl_usuarios`
+--
+ALTER TABLE `tbl_usuarios`
+  ADD CONSTRAINT `tbl_usuarios_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `tbl_roles` (`rol_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
