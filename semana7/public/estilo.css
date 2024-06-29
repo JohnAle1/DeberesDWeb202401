@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    margin-top: 2rem;
+  }
+  
+  .card-title, .list-group-item, .form-label {
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+  }
+  
+  .btn-primary:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+  }
